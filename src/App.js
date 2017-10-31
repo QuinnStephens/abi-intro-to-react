@@ -5,13 +5,11 @@ import './App.css';
 class App extends Component {
   render() {
     let introText = "I came from a variable!"
+    let headerText = "App says: Header says Hello!"
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Intro to React at Signal!</h1>
-        </header>
+        <Header text={headerText} />
         <p className="App-intro">
           {introText}
         </p>
@@ -21,3 +19,14 @@ class App extends Component {
 }
 
 export default App;
+
+class Header extends Component {
+  render() {
+    return (
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1 className="App-title">{this.props.text}</h1>
+      </header>
+      )
+  }
+}
