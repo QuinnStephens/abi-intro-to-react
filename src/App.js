@@ -3,23 +3,33 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+      introText: "I came from the state!",
+      buttonPressedCount: 0
+    }
+  }
+
   render() {
-    let introText = "I came from a variable!"
-    this.introText = introText
     let headerText = "App says: Header says Hello!"
 
     return (
       <div className="App">
         <Header text={headerText} alert={this.showAlert.bind(this)} />
         <p className="App-intro">
-          {introText}
+          {this.state.introText}
         </p>
       </div>
     );
   }
 
   showAlert() {
-    alert('App says: ' + this.introText)
+    this.setState({
+      buttonPressedCount: this.state.buttonPressedCount + 1
+    }, () => { alert('Button pressed ' + this.state.buttonPressedCount + ' times ') })
   }
 }
 
