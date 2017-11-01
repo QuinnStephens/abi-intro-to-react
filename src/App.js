@@ -8,39 +8,32 @@ class App extends Component {
     super()
 
     this.state = {
-      inputText: '',
-      showHeader: false
+      photo: {}
     }
   }
 
-  render() {
-    const header = this.state.showHeader ? <Header /> : "Please enter 6 or more characters."
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/photos/1")
+      .then(response => {
+        return response.json()
+      })
+      .then(json => {
+        this.setState({
+          photo: json
+        })
+      })
+  }
 
+  render() {
     return (
       <div className="App">
-        { header }
-        <form>
-          <input type="text" onChange={this.onInputChanged.bind(this)} />
-          <button onClick={this.onSubmit.bind(this)}>Submit</button>
-        </form>
-        <h2>{this.state.inputText}</h2>
+        <Header />
+        <div>
+          <p>{ this.state.photo.title }</p>
+          <p>{ this.state.photo.url }</p>
+        </div>
       </div>
     );
-  }
-
-  onInputChanged(event) {
-    const inputText = event.target.value
-    this.setState({
-      inputText
-    })
-  }
-
-  onSubmit(event) {
-    event.preventDefault()
-    const showHeader = this.state.inputText.length > 5
-    this.setState({
-      showHeader
-    })
   }
 }
 
@@ -51,7 +44,7 @@ class Header extends Component {
     return (
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Thanks for submitting!</h1>
+        <h1 className="App-title">API Call Time!</h1>
       </header>
       )
   }
