@@ -9,12 +9,12 @@ class App extends Component {
 
     this.state = {
       inputText: '',
-      userSubmitted: false
+      showHeader: false
     }
   }
 
   render() {
-    const header = this.state.userSubmitted ? <Header /> : null
+    const header = this.state.showHeader ? <Header /> : "Please enter 6 or more characters."
 
     return (
       <div className="App">
@@ -37,8 +37,9 @@ class App extends Component {
 
   onSubmit(event) {
     event.preventDefault()
+    const showHeader = this.state.inputText.length > 5
     this.setState({
-      userSubmitted: true
+      showHeader
     })
   }
 }
