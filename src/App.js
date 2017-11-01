@@ -8,14 +8,17 @@ class App extends Component {
     super()
 
     this.state = {
-      inputText: ''
+      inputText: '',
+      userSubmitted: false
     }
   }
 
   render() {
+    const header = this.state.userSubmitted ? <Header /> : null
+
     return (
       <div className="App">
-        <Header />
+        { header }
         <form>
           <input type="text" onChange={this.onInputChanged.bind(this)} />
           <button onClick={this.onSubmit.bind(this)}>Submit</button>
@@ -32,8 +35,11 @@ class App extends Component {
     })
   }
 
-  onSubmit() {
-    alert(this.state.inputText)
+  onSubmit(event) {
+    event.preventDefault()
+    this.setState({
+      userSubmitted: true
+    })
   }
 }
 
@@ -44,7 +50,7 @@ class Header extends Component {
     return (
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">My basic form</h1>
+        <h1 className="App-title">Thanks for submitting!</h1>
       </header>
       )
   }
