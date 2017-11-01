@@ -8,7 +8,7 @@ class App extends Component {
     super()
 
     this.state = {
-      count: 0
+      inputText: ''
     }
   }
 
@@ -16,35 +16,35 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Counter count={this.state.count} />
-        <button onClick={this.incrementCount.bind(this)}>Add to count</button>
+        <form>
+          <input type="text" onChange={this.onInputChanged.bind(this)} />
+          <button onClick={this.onSubmit.bind(this)}>Submit</button>
+        </form>
+        <h2>{this.state.inputText}</h2>
       </div>
     );
   }
 
-  incrementCount() {
+  onInputChanged(event) {
+    const inputText = event.target.value
     this.setState({
-      count: this.state.count + 1
+      inputText
     })
+  }
+
+  onSubmit() {
+    alert(this.state.inputText)
   }
 }
 
 export default App;
-
-class Counter extends Component {
-  render() {
-    return (
-      <h1 className="Counter-text">{this.props.count}</h1>
-      )
-  }
-}
 
 class Header extends Component {
   render() {
     return (
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">My counter app</h1>
+        <h1 className="App-title">My basic form</h1>
       </header>
       )
   }
